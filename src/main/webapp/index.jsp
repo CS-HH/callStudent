@@ -1,0 +1,155 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@page isELIgnored="false" %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>学生点到系统登录界面</title>
+    <% String contextPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath(); %>
+    <style>
+        body{
+            background: url("<%=contextPath%>/assets/img/backgrounds/1.jpg");
+        }
+    </style>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="<%=contextPath%>/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=contextPath%>/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<%=contextPath%>/assets/css/form-elements.css">
+    <link rel="stylesheet" href="<%=contextPath%>/assets/css/style.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="<%=contextPath%>/assets/ico/favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<%=contextPath%>/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<%=contextPath%>/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<%=contextPath%>/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="<%=contextPath%>/assets/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+
+<body>
+
+<!-- Top menu -->
+<nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Bootstrap Multi Step Registration Form Template</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="top-navbar-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+							<span class="li-text">
+								Put some text or
+							</span>
+                    <a href="#"><strong>links</strong></a>
+                    <span class="li-text">
+								here, or some icons:
+							</span>
+                    <span class="li-social">
+								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-envelope"></i></a>
+								<a href="#"><i class="fa fa-skype"></i></a>
+							</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Top content -->
+<div class="top-content">
+
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1>学生点到系统登录界面</h1>
+                    <div class="description" style="color: red">
+                        ${requestScope.msg}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 form-box">
+
+                    <form role="form" action="" method="post" class="registration-form">
+
+                        <fieldset>
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <p>Tell us who you are:</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                            </div>
+                            <div class="form-bottom">
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-first-name">账号</label>
+                                    <input type="text" name="account" placeholder="账号" class="form-first-name form-control" id="form-first-name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="form-last-name">密码</label>
+                                    <input type="password" name="password" placeholder="密码" class="form-last-name form-control" id="form-last-name">
+                                </div>
+
+                                <button type="button" class="btn btn-next" value="/admin/login" onclick="login(this.value)">管理员登录</button>
+                                <button type="button" class="btn btn-next" value="/student/login" onclick="login(this.value)">学生登录</button>
+                                <button type="button" class="btn btn-next" value="/teacher/login" onclick="login(this.value)">教师登录</button>
+
+                            </div>
+                        </fieldset>
+
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+More Information <a href="http://www.cssmoban.com/" target="_blank" title="iFox">艾弗克斯</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">iFox工作室</a>
+
+<script>
+    let login = function (path) {
+        $("form")[0].action = path;
+        $("form")[0].submit();
+    }
+</script>
+<!-- Javascript -->
+<script src="<%=contextPath%>/assets/js/jquery-1.11.1.min.js"></script>
+<script src="<%=contextPath%>/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="<%=contextPath%>/assets/js/jquery.backstretch.min.js"></script>
+<script src="<%=contextPath%>/assets/js/retina-1.1.0.min.js"></script>
+<script src="<%=contextPath%>/assets/js/scripts.js"></script>
+
+<!--[if lt IE 10]>
+<script src="<%=contextPath%>/assets/js/placeholder.js"></script>
+<![endif]-->
+
+</body>
+
+</html>

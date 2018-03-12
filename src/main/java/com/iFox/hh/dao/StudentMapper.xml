@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iFox.hh.dao.StudentMapper">
+    <cache eviction="FIFO" readOnly="false" flushInterval="60000" size="1024" />
+
+    <!--admin登录查询结果映射-->
+    <resultMap id="studentResult" type="com.iFox.hh.entity.StudentInfo">
+        <id column="id" property="id"/>
+        <result column="number" property="number"/>
+        <result column="password" property="password"/>
+        <result column="create_time" property="create_time"/>
+        <result column="update_time" property="update_time"/>
+        <result column="clazz" property="clazz"/>
+    </resultMap>
+
+
+
+    <resultMap id="course" type="com.iFox.hh.utils.vo.Course">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="take_time" property="take_time"/>
+        <result column="teacherId" property="teacherId"/>
+    </resultMap>
+
+    <resultMap id="hasCourse" type="com.iFox.hh.utils.vo.HasCourse">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="take_time" property="take_time"/>
+        <result column="teacher" property="teacher"/>
+    </resultMap>
+
+    <insert id="addHasCourse" parameterType="com.iFox.hh.utils.vo.HasCourse">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        has_course(NAME ,take_time, teacher,courseId, create_time,studentName)
+        VALUE
+        (#{name},#{take_time},#{teacher},#{courseId},#{create_time},#{studentName})
+    </insert>
+
+
+    <insert id="addLeave" parameterType="com.iFox.hh.utils.vo.LeaveRecord">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        leaverecord(studentName ,leaveDate, reason,teacher, create_time)
+        VALUE
+        (#{studentName},#{leaveDate},#{reason},#{teacher},#{create_time})
+    </insert>
+
+
+    <!-- 登录查询-->
+    <select id="getStudent" resultMap="studentResult">
+        SELECT id ,name,number,clazz,password,create_time,update_time
+        FROM student
+        WHERE number = #{number}
+        AND password = #{password}
+    </select>
+
+    <select id="queryHasCourse" resultMap="hasCourse">
+        SELECT id,name,take_time,teacher,courseId
+        FROM has_course
+        WHERE studentName = #{studentName}
+    </select>
+
+    <select id="isSelect" resultMap="hasCourse">
+        SELECT id,name,take_time,teacher
+        FROM has_course
+        WHERE courseId = #{id}
+        AND studentName = #{studentName}
+    </select>
+
+    <select id="getCourse" resultMap="course">
+        SELECT id,name,take_time,teacherId
+        FROM course
+        WHERE id = #{id}
+    </select>
+
+    <select id="getTeacherName" resultType="java.lang.String">
+        SELECT name
+        FROM teacher
+        WHERE id = #{id}
+    </select>
+
+
+</mapper>

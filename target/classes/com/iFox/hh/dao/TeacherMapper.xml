@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iFox.hh.dao.TeacherMapper">
+    <cache eviction="FIFO" readOnly="false" flushInterval="60000" size="1024" />
+
+    <!--admin登录查询结果映射-->
+    <resultMap id="teacherResult" type="com.iFox.hh.entity.TeacherInfo">
+        <id column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="create_time" property="create_time"/>
+        <result column="update_time" property="update_time"/>
+    </resultMap>
+
+    <resultMap id="hasCourse" type="com.iFox.hh.utils.vo.HasCourse">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="take_time" property="take_time"/>
+        <result column="teacher" property="teacher"/>
+        <result column="studentName" property="studentName"/>
+    </resultMap>
+
+    <resultMap id="leave" type="com.iFox.hh.utils.vo.LeaveRecord">
+        <id column="id" property="id"/>
+        <result column="leaveDate" property="leaveDate"/>
+        <result column="reason" property="reason"/>
+        <result column="teacher" property="teacher"/>
+        <result column="studentName" property="studentName"/>
+        <result column="isAgree" property="isAgree"/>
+    </resultMap>
+
+    <resultMap id="attendance" type="com.iFox.hh.utils.vo.Attendance">
+        <id column="id" property="id"/>
+        <result column="studentName" property="studentName"/>
+        <result column="courseName" property="courseName"/>
+        <result column="teacher" property="teacher"/>
+        <result column="status" property="status"/>
+    </resultMap>
+
+
+    <!-- 登录查询-->
+    <select id="getTeacher" resultMap="teacherResult">
+        SELECT id ,name,account,password,create_time,update_time
+        FROM teacher
+        WHERE account = #{account}
+        AND password = #{password}
+    </select>
+
+    <select id="callName" resultMap="hasCourse">
+        SELECT id,name,take_time,teacher,studentName
+        FROM has_course
+        WHERE teacher= #{teacher}
+    </select>
+
+    <select id="getLeaveRecord" resultMap="leave">
+        SELECT id,leaveDate,reason,teacher,studentName,isAgree
+        FROM leaverecord
+        WHERE teacher = #{teacher}
+    </select>
+
+    <select id="isRecord" resultMap="attendance">
+        SELECT id,studentName,courseName,teacher,status
+        FROM attendance
+        WHERE studentName = #{studentName}
+        AND courseName = #{courseName}
+    </select>
+
+
+    <!--添加-->
+    <insert id="operate" parameterType="com.iFox.hh.utils.vo.Attendance">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        attendance(studentName ,courseName,teacher,status, create_time)
+        VALUE
+        (#{studentName},#{courseName},#{teacher},#{status},#{create_time})
+    </insert>
+
+    <!--修改-->
+    <update id="updateLeaveRecord">
+        UPDATE leaverecord
+        SET isAgree = #{status}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateAttendance">
+        UPDATE attendance
+        SET status = #{status}
+        WHERE studentName = #{studentName}
+        AND courseName = #{courseName}
+    </update>
+</mapper>

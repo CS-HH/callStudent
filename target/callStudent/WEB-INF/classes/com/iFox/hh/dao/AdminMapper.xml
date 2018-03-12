@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iFox.hh.dao.AdminMapper">
+    <cache eviction="FIFO" readOnly="false" flushInterval="60000" size="1024" />
+
+    <!--admin登录查询结果映射-->
+    <resultMap id="adminResult" type="com.iFox.hh.entity.AdminInfo">
+        <id column="id" property="id"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="create_time" property="create_time"/>
+        <result column="update_time" property="update_time"/>
+    </resultMap>
+
+    <resultMap id="teacher" type="com.iFox.hh.entity.TeacherInfo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+    </resultMap>
+
+    <resultMap id="student" type="com.iFox.hh.entity.StudentInfo">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="number" property="number"/>
+        <result column="clazz" property="clazz"/>
+    </resultMap>
+
+    <resultMap id="course" type="com.iFox.hh.utils.vo.Course">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="take_time" property="take_time"/>
+        <result column="teacherId" property="teacherId"/>
+    </resultMap>
+
+
+    <!-- 登录查询-->
+    <select id="getAdmin" resultMap="adminResult">
+        SELECT id ,account,password,create_time,update_time
+        FROM admin
+        WHERE account = #{account}
+        AND password = #{password}
+    </select>
+
+
+    <!--插入学生-->
+    <insert id="addStudent" parameterType="com.iFox.hh.entity.StudentInfo">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        student(NAME , number, PASSWORD, clazz, create_time)
+        VALUE
+        (#{name},#{number},#{password},#{clazz},#{create_time})
+    </insert>
+
+    <!--插入老师-->
+    <insert id="addTeacher" parameterType="com.iFox.hh.entity.TeacherInfo">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        teacher(NAME ,account, PASSWORD, create_time)
+        VALUE
+        (#{name},#{account},#{password},#{create_time})
+    </insert>
+
+    <!--插入课程-->
+    <insert id="addCourse" parameterType="com.iFox.hh.utils.vo.Course">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        course(NAME ,take_time, teacherId, create_time)
+        VALUE
+        (#{name},#{take_time},#{teacherId},#{create_time})
+    </insert>
+
+
+    <insert id="addAudio" parameterType="com.iFox.hh.utils.vo.AudioRecord">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO
+        audiorecord(path ,teacher, course, create_time)
+        VALUE
+        (#{path},#{teacherName},#{courseName},#{create_time})
+    </insert>
+
+    <select id="getAudio" resultType="java.lang.String">
+        SELECT path
+        FROM audiorecord
+        WHERE teacher = #{teacher}
+    </select>
+
+
+    <select id="queryTeacher" resultMap="teacher">
+        SELECT id,name
+        FROM teacher
+    </select>
+
+    <select id="queryStudent" resultMap="student">
+        SELECT id,name,number ,clazz
+        FROM student
+    </select>
+
+    <select id="queryCourse" resultMap="course">
+        SELECT id,name,take_time,teacherId
+        FROM course
+    </select>
+
+    <select id="queryTeacherName" resultType="java.lang.String">
+        SELECT name
+        FROM teacher
+        WHERE id = #{id}
+    </select>
+
+    <select id="getCourseName" resultType="java.lang.String">
+        SELECT name
+        FROM course
+        WHERE teacherId = #{id}
+    </select>
+
+    <!--删除-->
+    <delete id="deleteStudent">
+        DELETE FROM student WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteCourse">
+        DELETE FROM course WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteTeacher">
+        DELETE FROM teacher WHERE id = #{id}
+    </delete>
+
+
+    <!--修改-->
+    <update id="updateStudent" parameterType="com.iFox.hh.entity.StudentInfo">
+        UPDATE student
+        SET name=#{name },number=#{number },clazz=#{clazz},update_time=#{update_time}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateCourse" parameterType="com.iFox.hh.utils.vo.Course">
+        UPDATE course
+        SET name=#{name },take_time=#{take_time },update_time=#{update_time}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateTeacher" parameterType="com.iFox.hh.entity.TeacherInfo">
+        UPDATE teacher
+        SET name=#{name },update_time=#{update_time}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
