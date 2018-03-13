@@ -104,7 +104,7 @@ public class TeacherController {
         return "200";
     }
 
-    public boolean isRecord(String studentName,String courseName){
+    private boolean isRecord(String studentName, String courseName){
         Attendance attendance = teacherService.isRecord(studentName, courseName);
         return attendance != null;
     }

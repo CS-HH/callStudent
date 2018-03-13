@@ -173,7 +173,8 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
             //返回数据的格式
             dataType: "json",//"xml", "html", "script", "json", "jsonp", "text".
             success:function(data) {
-                    alert("操作成功")
+                alert("操作成功");
+                window.location.reload();
             },
             error: function(){
                 //请求出错处理
@@ -194,7 +195,9 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
             //返回数据的格式
             dataType: "json",//"xml", "html", "script", "json", "jsonp", "text".
             success:function(data) {
-                alert("操作成功")
+                alert("操作成功");
+                window.location.reload();
+
             },
             error: function(){
                 //请求出错处理

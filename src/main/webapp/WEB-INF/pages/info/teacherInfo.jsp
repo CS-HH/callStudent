@@ -409,7 +409,6 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
         let id = $(this).parent().parent().children(":first").text();
         let name = $(this).parent().parent().children("td").eq(1).text();
 
-        alert(id);
 
         $("#updateId").val(id);
         $("#updateName").val(name);
