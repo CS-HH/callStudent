@@ -16,6 +16,12 @@
         <result column="clazz" property="clazz"/>
     </resultMap>
 
+    <resultMap id="attend" type="com.iFox.hh.utils.vo.Attendance">
+        <id column="id" property="id"/>
+        <result column="courseName" property="courseName"/>
+        <result column="create_time" property="create_time"/>
+        <result column="status" property="status"/>
+    </resultMap>
 
 
     <resultMap id="course" type="com.iFox.hh.utils.vo.Course">
@@ -48,9 +54,9 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         INSERT INTO
-        leaverecord(studentName ,leaveDate, reason,teacher, create_time)
+        leaverecord(studentName ,take_time, reason,teacher,courseName, create_time)
         VALUE
-        (#{studentName},#{leaveDate},#{reason},#{teacher},#{create_time})
+        (#{studentName},#{take_time},#{reason},#{teacher},#{courseName},#{create_time})
     </insert>
 
 
@@ -60,6 +66,18 @@
         FROM student
         WHERE number = #{number}
         AND password = #{password}
+    </select>
+
+    <select id="attendance" resultMap="attend">
+        SELECT id,courseName,create_time,status
+        FROM attendance
+        WHERE studentName = #{studentName}
+    </select>
+
+    <select id="getTeacherId" resultType="java.lang.Long">
+        SELECT id
+        FROM teacher
+        WHERE name = #{teacher}
     </select>
 
     <select id="queryHasCourse" resultMap="hasCourse">
@@ -79,6 +97,12 @@
         SELECT id,name,take_time,teacherId
         FROM course
         WHERE id = #{id}
+    </select>
+
+    <select id="getCourseByTI" resultMap="course">
+        SELECT id,name,take_time,teacherId
+        FROM course
+        WHERE teacherId = #{teacherId}
     </select>
 
     <select id="getTeacherName" resultType="java.lang.String">

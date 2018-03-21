@@ -25,7 +25,8 @@
 
     <resultMap id="leave" type="com.iFox.hh.utils.vo.LeaveRecord">
         <id column="id" property="id"/>
-        <result column="leaveDate" property="leaveDate"/>
+        <result column="take_time" property="take_time"/>
+        <result column="courseName" property="courseName"/>
         <result column="reason" property="reason"/>
         <result column="teacher" property="teacher"/>
         <result column="studentName" property="studentName"/>
@@ -56,7 +57,7 @@
     </select>
 
     <select id="getLeaveRecord" resultMap="leave">
-        SELECT id,leaveDate,reason,teacher,studentName,isAgree
+        SELECT id,take_time,reason,teacher,studentName,isAgree,take_time,courseName
         FROM leaverecord
         WHERE teacher = #{teacher}
     </select>

@@ -2,6 +2,7 @@ package com.iFox.hh.service;
 
 import com.iFox.hh.entity.AdminInfo;
 import com.iFox.hh.entity.StudentInfo;
+import com.iFox.hh.utils.vo.Attendance;
 import com.iFox.hh.utils.vo.Course;
 import com.iFox.hh.utils.vo.HasCourse;
 import com.iFox.hh.utils.vo.LeaveRecord;
@@ -28,4 +29,10 @@ public interface StudentService {
     List<HasCourse> queryHasCourse(String student);
 
     void addLeave(LeaveRecord leaveRecord);
+
+    Long getTeacherId(String teacher);
+
+    Course getCourseByTI(Long teacherId);
+
+    List<Attendance> attendance(String studentName);
 }

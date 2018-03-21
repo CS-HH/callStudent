@@ -4,6 +4,7 @@ import com.iFox.hh.entity.StudentInfo;
 import com.iFox.hh.service.AdminService;
 import com.iFox.hh.service.StudentService;
 import com.iFox.hh.utils.MD5Utils;
+import com.iFox.hh.utils.vo.Attendance;
 import com.iFox.hh.utils.vo.Course;
 import com.iFox.hh.utils.vo.HasCourse;
 import com.iFox.hh.utils.vo.LeaveRecord;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by exphuhong
@@ -60,8 +62,20 @@ public class StudentController {
     }
 
     @RequestMapping("queryCourse")
-    public ModelAndView queryCourse() {
+    public ModelAndView queryCourse(String student) {
+        List<HasCourse> hasCourseList = studentService.queryHasCourse(student);
         List<Course> courseList = adminService.queryCourse();
+        for (HasCourse hasCourse:hasCourseList) {
+            for (Course course:courseList) {
+                if (Objects.equals(course.getId(), hasCourse.getCourseId())) {
+                    course.setStatus("yixuan");
+                    System.out.println(course.getStatus());
+                }else {
+                    course.setStatus("weixuan");
+                    System.out.println(course.getStatus());
+                }
+            }
+        }
         ModelAndView modelAndView = new ModelAndView("student/selectCourse");
         modelAndView.addObject("courseList", courseList);
         return modelAndView;
@@ -101,13 +115,33 @@ public class StudentController {
 
     @RequestMapping("leave")
     public String addLeave(LeaveRecord leaveRecord) {
+        Course course = getCourseByTI(getTeacherId(leaveRecord.getTeacher()));
         leaveRecord.setCreate_time(new Date());
+        leaveRecord.setCourseName(course.getName());
+        leaveRecord.setTake_time(course.getTake_time());
         studentService.addLeave(leaveRecord);
         Long id = leaveRecord.getId();
         //id来判断是否发送请假请求
         return "redirect:/student/queryHasCourse";
 
+    }
 
+    @RequestMapping("queryOnCourse")
+    public ModelAndView attendance(String studentName){
+        System.out.println(studentName);
+        ModelAndView modelAndView = new ModelAndView("student/onCourse");
+        List<Attendance> attendanceList = studentService.attendance(studentName);
+        System.out.println(attendanceList.get(0));
+        modelAndView.addObject("attendanceList", attendanceList);
+        return modelAndView;
+    }
+
+    private Long getTeacherId(String teacher) {
+       return studentService.getTeacherId(teacher);
+    }
+
+    private Course getCourseByTI(Long teacherId) {
+        return studentService.getCourseByTI(teacherId);
     }
 
     private Course getCourse(Long courseId) {

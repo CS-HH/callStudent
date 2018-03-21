@@ -7,6 +7,7 @@ import com.iFox.hh.entity.TeacherInfo;
 import com.iFox.hh.service.AdminService;
 import com.iFox.hh.utils.vo.AudioRecord;
 import com.iFox.hh.utils.vo.Course;
+import com.iFox.hh.utils.vo.HasCourse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,6 +84,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public String getAudio(String teacher) {
         return adminMapper.getAudio(teacher);
+    }
+
+    @Override
+    public List<HasCourse> queryHasCourse(String teacher) {
+        return adminMapper.getTAndS(teacher);
     }
 
     @Transactional

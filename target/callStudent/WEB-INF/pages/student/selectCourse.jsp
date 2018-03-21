@@ -87,7 +87,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>${sessionScope.user}</strong> 信息添加界面</h1>
+                    <h1><strong>${sessionScope.user}</strong> 选课界面</h1>
                     <div class="description">
                         <p>
                             点击下方按钮进行选课的管理
@@ -121,6 +121,7 @@
                         <td>课程名</td>
                         <td>上课时间</td>
                         <td>任课教师</td>
+                        <td>是否选</td>
                         <td>操作</td>
                     </tr>
                     <c:if test="${requestScope.courseList != null}">
@@ -130,6 +131,7 @@
                                 <td>${course.name}</td>
                                 <td>${course.take_time}</td>
                                 <td>${course.teacherId}</td>
+                                <td class="${course.status}"></td>
                                 <td>
                                     <button type="button"  class="btn btn-default selectCourse">选课</button>
                                 </td>
@@ -156,6 +158,12 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
 <script src="<%=contextPath%>/assets/js/scripts.js"></script>
 
 <script>
+
+    $(document).ready(function () {
+       $(".yixuan").text("已选");
+        $(".weixuan").text("未选");
+       $(".yixuan").parent().css("backgroundColor","#EFEFEF");
+    });
     $(".selectCourse").click(function () {
         let id = $(this).parent().parent().children(":first").text();
         let studentName = "${sessionScope.user}";
@@ -174,6 +182,7 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
                 }else if(data === "300"){
                     alert("该课程已选");
                 }
+                window.location.reload();
             },
             error: function(){
                 //请求出错处理
@@ -181,6 +190,7 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
             }
         });
     });
+
 </script>
 </body>
 

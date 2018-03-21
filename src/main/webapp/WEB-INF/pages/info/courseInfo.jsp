@@ -223,10 +223,47 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="take_time" class="col-md-3 control-label">上课时间</label>
                                             <div class="col-md-6">
-                                                <input type="date" name="take_time" id="take_time"
-                                                       class="form-control input-sm">
+                                                <input type="hidden" id="take_time" name="take_time" class="form-control input-sm">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="week" class="col-md-3 control-label">第几周</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control" id="week" >
+                                                    <option value="第一周">第一周</option>
+                                                    <option value="第二周">第二周</option>
+                                                    <option value="第三周">第三周</option>
+                                                    <option value="第四周">第四周</option>
+                                                    <option value="第五周">第五周</option>
+                                                    <option value="第六周">第六周</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="date" class="col-md-3 control-label">星期几</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control" id="date" >
+                                                    <option value="星期一">星期一</option>
+                                                    <option value="星期二">星期二</option>
+                                                    <option value="星期三">星期三</option>
+                                                    <option value="星期四">星期四</option>
+                                                    <option value="星期五">星期五</option>
+                                                    <option value="星期六">星期六</option>
+                                                    <option value="星期天">星期天</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="time" class="col-md-3 control-label">几点</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control" id="time">
+                                                    <option value="8:30-10:00">8:30-10:00</option>
+                                                    <option value="10:30-12:00">10:30-12:00</option>
+                                                    <option value="14:00-15:30">14:00-15:30</option>
+                                                    <option value="16:30-18:00">16:30-18:00</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -243,7 +280,7 @@
 
                                         <div class="form-group">
                                             <div class="col-md-5 col-md-offset-3">
-                                                <button type="submit" class="btn btn-success ">提交</button>
+                                                <button type="submit" class="btn btn-success " id="sub">提交</button>
                                                 <button type="reset" class="btn btn-success">重置</button>
                                             </div>
                                         </div>
@@ -276,10 +313,47 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="updateTake_time" class="col-md-3 control-label">上课时间</label>
                                             <div class="col-md-6">
-                                                <input type="date" name="take_time" id="updateTake_time"
-                                                       class="form-control input-sm">
+                                                <input type="hidden" id="take_times" name="take_time" class="form-control input-sm">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="week" class="col-md-3 control-label">第几周</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control" id="upweek" >
+                                                    <option value="第一周">第一周</option>
+                                                    <option value="第二周">第二周</option>
+                                                    <option value="第三周">第三周</option>
+                                                    <option value="第四周">第四周</option>
+                                                    <option value="第五周">第五周</option>
+                                                    <option value="第六周">第六周</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="date" class="col-md-3 control-label">星期几</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control" id="update" >
+                                                    <option value="星期一">星期一</option>
+                                                    <option value="星期二">星期二</option>
+                                                    <option value="星期三">星期三</option>
+                                                    <option value="星期四">星期四</option>
+                                                    <option value="星期五">星期五</option>
+                                                    <option value="星期六">星期六</option>
+                                                    <option value="星期天">星期天</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="time" class="col-md-3 control-label">几点</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control" id="uptime">
+                                                    <option value="8:30-10:00">8:30-10:00</option>
+                                                    <option value="10:30-12:00">10:30-12:00</option>
+                                                    <option value="14:00-15:30">14:00-15:30</option>
+                                                    <option value="16:30-18:00">16:30-18:00</option>
+                                                </select>
                                             </div>
                                         </div>
 
@@ -295,7 +369,7 @@
 
                                         <div class="form-group">
                                             <div class="col-md-5 col-md-offset-3">
-                                                <button type="submit" class="btn btn-success ">提交</button>
+                                                <button type="submit" class="btn btn-success " id="upSub">提交</button>
                                                 <button type="reset" class="btn btn-success">重置</button>
                                             </div>
                                         </div>
@@ -312,8 +386,38 @@
                         </a>
                         <a href="/admin/queryCourse" class="btn btn-warning">课程信息查看
                         </a>
+
                         <br>
                         <br>
+                        <button type="button" class="btn btn-danger"  data-toggle="modal"
+                                data-target=".bs-example6-modal-md" id="getTAndS">查看对应老师的学生</button>
+
+                        <div class="modal fade bs-example6-modal-md" tabindex="-1" role="dialog"
+                             aria-labelledby="mySmallModalLabel">
+                            <div class="modal-dialog modal-md" role="document">
+                                <div class="modal-content">
+                                    <form action="/admin/getTAndS" method="post" class="form-horizontal">
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="getStudentByT" class="col-md-3 control-label">任课教师</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control" id="getStudentByT" name="teacher">
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-5 col-md-offset-3">
+                                                <button type="submit" class="btn btn-success ">提交</button>
+                                                <button type="reset" class="btn btn-success">重置</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <button type="button" class="btn btn-success" data-toggle="modal"
                            data-target=".bs-example5-modal-md" id="audioUpload">点名音频上传</button>
                         <div class="modal fade bs-example5-modal-md" tabindex="-1" role="dialog"
@@ -409,6 +513,20 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
 <script src="<%=contextPath%>/assets/js/scripts.js"></script>
 
 <script>
+    $("#sub").click(function () {
+        let week = $("#week").val();
+        let date = $("#date").val();
+        let time = $("#time").val();
+        $("#take_time").val(week + date + time);
+    });
+
+    $("#upSub").click(function () {
+        let week = $("#upweek").val();
+        let date = $("#update").val();
+        let time = $("#uptime").val();
+        $("#take_times").val(week + date + time);
+    });
+
     $(".deleteTr").click(function () {
         let id = $(this).parent().parent().children(":first").text();
         $.ajax({
@@ -478,7 +596,6 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
             //返回数据的格式
             dataType: "json",//"xml", "html", "script", "json", "jsonp", "text".
             success: function (data) {
-                alert(data.length);
                 let str = "";
                 for (let i = 0; i < data.length; i++) {
                     let id = data[i].id;
@@ -511,6 +628,31 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
                     str = str + "<option value=" + id + ">" + name + "</option>";
                 }
                 document.getElementById("teacher").innerHTML = str;//第一种加载js方法
+            },
+            error: function(){
+                //请求出错处理
+                alert("请求出错");
+            }
+        });
+    });
+    $("#getTAndS").click(function () {
+        $.ajax({
+            //提交数据的类型 POST GET
+            type:"POST",
+            //提交的网址
+            url:"/admin/queryTeacher",
+            //提交的数据
+            // data:{name:name},
+            //返回数据的格式
+            dataType: "json",//"xml", "html", "script", "json", "jsonp", "text".
+            success:function(data) {
+                let str = "";
+                for (let i = 0; i < data.length; i++) {
+                    let id = data[i].id;
+                    let name = data[i].name;
+                    str = str + "<option value=" + id + ">" + name + "</option>";
+                }
+                document.getElementById("getStudentByT").innerHTML = str;//第一种加载js方法
             },
             error: function(){
                 //请求出错处理

@@ -9,6 +9,7 @@ import com.iFox.hh.service.StudentService;
 import com.iFox.hh.utils.MD5Utils;
 import com.iFox.hh.utils.vo.AudioRecord;
 import com.iFox.hh.utils.vo.Course;
+import com.iFox.hh.utils.vo.HasCourse;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -233,7 +234,17 @@ public class AdminController {
         return "admin/admin";
     }
 
-    public String getCourseName(Integer id) {
+    private String getCourseName(Integer id) {
         return adminService.getCourseName(id);
+    }
+
+
+    @RequestMapping("getTAndS")
+    public ModelAndView queryHasCourse(String teacher) {
+        String teacherName = studentService.getTeacherName(Integer.parseInt(teacher));
+        List<HasCourse> hasCourseList = adminService.queryHasCourse(teacherName);
+        ModelAndView modelAndView = new ModelAndView("info/has_course_list");
+        modelAndView.addObject("hasCourseList", hasCourseList);
+        return modelAndView;
     }
 }

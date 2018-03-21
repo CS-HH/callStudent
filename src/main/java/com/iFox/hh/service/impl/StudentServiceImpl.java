@@ -3,6 +3,7 @@ package com.iFox.hh.service.impl;
 import com.iFox.hh.dao.StudentMapper;
 import com.iFox.hh.entity.StudentInfo;
 import com.iFox.hh.service.StudentService;
+import com.iFox.hh.utils.vo.Attendance;
 import com.iFox.hh.utils.vo.Course;
 import com.iFox.hh.utils.vo.HasCourse;
 import com.iFox.hh.utils.vo.LeaveRecord;
@@ -55,6 +56,21 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void addLeave(LeaveRecord leaveRecord) {
         studentMapper.addLeave(leaveRecord);
+    }
+
+    @Override
+    public Long getTeacherId(String teacher) {
+        return studentMapper.getTeacherId(teacher);
+    }
+
+    @Override
+    public Course getCourseByTI(Long teacherId) {
+        return studentMapper.getCourseByTI(teacherId);
+    }
+
+    @Override
+    public List<Attendance> attendance(String studentName) {
+        return studentMapper.attendance(studentName);
     }
 
 }

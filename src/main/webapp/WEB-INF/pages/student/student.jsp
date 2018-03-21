@@ -87,7 +87,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>${sessionScope.user}</strong> 信息添加界面</h1>
+                    <h1><strong>${sessionScope.user}</strong> 选课请假界面</h1>
                     <div class="description">
                         <p>
                             点击下方按钮进行选课的管理
@@ -100,9 +100,13 @@
 
                     <fieldset>
 
-                        <a href="/student/queryCourse" class="btn btn-success">选课功能
+                        <a href="/student/queryCourse?student=${sessionScope.user}" class="btn btn-success">选课功能
                         </a>
                         <a href="/student/queryHasCourse?student=${sessionScope.user}" class="btn btn-success">请假功能
+                        </a>
+                        <br>
+                        <br>
+                        <a href="/student/queryOnCourse?studentName=${sessionScope.user}" class="btn btn-success">查看上课信息
                         </a>
 
 
@@ -113,33 +117,7 @@
 
             </div>
 
-            <br>
-            <br>
-            <div class="row">
-                <table class="table">
-                    <tr bgcolor="#f0f8ff">
-                        <td>编号</td>
-                        <td>课程名</td>
-                        <td>上课时间</td>
-                        <td>任课教师</td>
-                        <td>操作</td>
-                    </tr>
-                    <c:if test="${requestScope.courseList != null}">
-                        <c:forEach items="${requestScope.courseList}" var="course">
-                            <tr bgcolor="#f0f8ff">
-                                <td>${course.id}</td>
-                                <td>${course.name}</td>
-                                <td>${course.take_time}</td>
-                                <td>${course.teacherId}</td>
-                                <td>
-                                    <button type="button"  class="btn btn-default selectCourse">选课</button>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </c:if>
-                </table>
 
-            </div>
 
         </div>
     </div>
@@ -156,32 +134,6 @@ More Templates <a href="http://www.cssmoban.com/" target="_blank" title="IFOX">I
 <script src="<%=contextPath%>/assets/js/retina-1.1.0.min.js"></script>
 <script src="<%=contextPath%>/assets/js/scripts.js"></script>
 
-<script>
-    $(".selectCourse").click(function () {
-        let id = $(this).parent().parent().children(":first").text();
-        $.ajax({
-            //提交数据的类型 POST GET
-            type:"POST",
-            //提交的网址
-            url:"/student/selectCourse",
-            //提交的数据
-             data:{id:id},
-            //返回数据的格式
-            dataType: "text",//"xml", "html", "script", "json", "jsonp", "text".
-            success:function(data) {
-                if (data==="200"){
-                    alert("选课成功");
-                }else if(data === "300"){
-                    alert("该课程已选");
-                }
-            },
-            error: function(){
-                //请求出错处理
-                alert("请求出错");
-            }
-        });
-    });
-</script>
 </body>
 
 </html>

@@ -101,7 +101,7 @@
 
                     <fieldset>
 
-                        <a href="/teacher/callName" class="btn btn-success">点名系统
+                        <a href="/teacher/callName?teacher=${sessionScope.user}" class="btn btn-success">点名系统
                         </a>
 
 
@@ -118,7 +118,8 @@
                 <table class="table">
                     <tr bgcolor="#f0f8ff">
                         <td>编号</td>
-                        <td>请假时间</td>
+                        <td>上课时间</td>
+                        <td>课程名</td>
                         <td>请假原因</td>
                         <td>学生</td>
                         <td>是否同意</td>
@@ -128,7 +129,8 @@
                         <c:forEach items="${requestScope.leaveList}" var="leaveList">
                             <tr bgcolor="#f0f8ff">
                                 <td>${leaveList.id}</td>
-                                <td>${leaveList.leaveDate}</td>
+                                <td>${leaveList.take_time}</td>
+                                <td>${leaveList.courseName}</td>
                                 <td>${leaveList.reason}</td>
                                 <td>${leaveList.studentName}</td>
                                 <td>${leaveList.isAgree}</td>

@@ -5,6 +5,7 @@ import com.iFox.hh.entity.StudentInfo;
 import com.iFox.hh.entity.TeacherInfo;
 import com.iFox.hh.utils.vo.AudioRecord;
 import com.iFox.hh.utils.vo.Course;
+import com.iFox.hh.utils.vo.HasCourse;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -49,4 +50,6 @@ public interface AdminMapper {
     void addAudio(AudioRecord audioRecord);
 
     String getAudio(String teacher);
+
+    List<HasCourse> getTAndS(String teacher);
 }

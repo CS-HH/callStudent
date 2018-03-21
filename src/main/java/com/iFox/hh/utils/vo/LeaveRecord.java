@@ -13,11 +13,28 @@ public class LeaveRecord implements Serializable {
     private static final long serialVersionUID = 4990198217508023008L;
 
     private Long id;
-    private String leaveDate;
+    private String take_time;
     private String reason;
     private String  teacher;
     private String studentName;
     private String isAgree;
+    private String courseName;
+
+    public String getTake_time() {
+        return take_time;
+    }
+
+    public void setTake_time(String take_time) {
+        this.take_time = take_time;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 
     private Date create_time;
     private Date update_time;
@@ -30,7 +47,7 @@ public class LeaveRecord implements Serializable {
         LeaveRecord that = (LeaveRecord) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (leaveDate != null ? !leaveDate.equals(that.leaveDate) : that.leaveDate != null) return false;
+        if (take_time != null ? !take_time.equals(that.take_time) : that.take_time != null) return false;
         if (reason != null ? !reason.equals(that.reason) : that.reason != null) return false;
         if (teacher != null ? !teacher.equals(that.teacher) : that.teacher != null) return false;
         if (studentName != null ? !studentName.equals(that.studentName) : that.studentName != null) return false;
@@ -42,7 +59,7 @@ public class LeaveRecord implements Serializable {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (leaveDate != null ? leaveDate.hashCode() : 0);
+        result = 31 * result + (take_time != null ? take_time.hashCode() : 0);
         result = 31 * result + (reason != null ? reason.hashCode() : 0);
         result = 31 * result + (teacher != null ? teacher.hashCode() : 0);
         result = 31 * result + (studentName != null ? studentName.hashCode() : 0);
@@ -56,7 +73,7 @@ public class LeaveRecord implements Serializable {
     public String toString() {
         return "LeaveRecord{" +
                 "id=" + id +
-                ", leaveDate='" + leaveDate + '\'' +
+                ", take_time='" + take_time + '\'' +
                 ", reason='" + reason + '\'' +
                 ", teacher='" + teacher + '\'' +
                 ", studentName='" + studentName + '\'' +
@@ -74,13 +91,7 @@ public class LeaveRecord implements Serializable {
         this.id = id;
     }
 
-    public String getLeaveDate() {
-        return leaveDate;
-    }
 
-    public void setLeaveDate(String leaveDate) {
-        this.leaveDate = leaveDate;
-    }
 
     public String getReason() {
         return reason;

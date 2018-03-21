@@ -35,6 +35,15 @@
     </resultMap>
 
 
+    <resultMap id="hasCourse" type="com.iFox.hh.utils.vo.HasCourse">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="take_time" property="take_time"/>
+        <result column="teacher" property="teacher"/>
+        <result column="studentName" property="studentName"/>
+    </resultMap>
+
+
     <!-- 登录查询-->
     <select id="getAdmin" resultMap="adminResult">
         SELECT id ,account,password,create_time,update_time
@@ -94,6 +103,11 @@
         WHERE teacher = #{teacher}
     </select>
 
+    <select id="getTAndS" resultMap="hasCourse">
+        SELECT id,name,take_time,teacher,studentName
+        FROM has_course
+        WHERE teacher = #{teacher}
+    </select>
 
     <select id="queryTeacher" resultMap="teacher">
         SELECT id,name

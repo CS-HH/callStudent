@@ -87,7 +87,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>${sessionScope.user}</strong> 信息添加界面</h1>
+                    <h1><strong>${sessionScope.user}</strong> 点名界面</h1>
                     <div class="description">
                         <p>
                             点击下方按钮进行选课的管理

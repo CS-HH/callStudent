@@ -120,13 +120,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="leaveDate" class="col-md-3 control-label">请假时间</label>
-                                            <div class="col-md-6">
-                                                <input type="leaveDate" name="leaveDate" id="leaveDate" class="form-control input-sm">
-                                            </div>
-                                        </div>
-
 
                                         <div class="form-group">
                                             <label for="reason" class="col-md-3 control-label">请假理由</label>
